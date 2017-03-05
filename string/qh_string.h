@@ -5,7 +5,8 @@
 
 namespace qh
 {
-    class string {
+    class string
+    {
     public:
         //ctor
         string();
@@ -24,7 +25,7 @@ namespace qh
         const char* c_str() const;
 
         // set & get
-        char* operator[](size_t index);
+        char& operator[](size_t index);
 
     private:
         char*  data_;
@@ -33,5 +34,3 @@ namespace qh
 }
 
 #endif
-
-

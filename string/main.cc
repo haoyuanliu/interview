@@ -1,17 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
+#include <iostream>
+
 #include "qh_string.h"
 
+void test()
+{
+    qh::string str1;
+    assert(str1.data() == NULL && str1.size() == 0);
+
+    char s[] = "Hello";
+    qh::string str2(s);
+    assert(str2.size() == 5);
+
+    qh::string str3(s, 10);
+    assert(str3.size() == 10);
+
+    qh::string str4(str3);
+    assert(str4.size() == 10);
+
+    qh::string str5(str2);
+    assert(str5.size() == 5);
+
+    qh::string str6 = str5;
+    assert(str6.size() == 5);
+}
+
+void test1()
+{
+    char s[] = "Hello";
+    qh::string str1(s);
+    printf("%s\n", str1.data());
+    printf("%s\n", str1.c_str());
+}
 
 int main(int argc, char* argv[])
 {
-    //TODO 在这里添加单元测试，越多越好，代码路径覆盖率越全越好
-    //TODO 单元测试写法请参考INIParser那个项目，不要写一堆printf，要用assert进行断言判断。
+    test();
+    test1();
 
 #ifdef WIN32
     system("pause");
 #endif
-
+    std::cout << "Success!\n";
 	return 0;
 }
-
