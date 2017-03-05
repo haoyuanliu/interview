@@ -29,8 +29,7 @@ namespace qh
         {
             if(this != &rhs)
             {
-                if(data_)
-                    delete[] data_;
+                clear();
                 size_ = rhs.size();
                 capa_ = rhs.capa();
                 data_ = new T[capa_];
@@ -110,8 +109,11 @@ namespace qh
 
         void clear()
         {
-            for(size_t i = 0; i < size_; ++i)
-                data_[i] = 0;
+            if(data_)
+                delete[] data_;
+            data_ = NULL;
+            size_ = 0;
+            capa_ = 0;
         }
 
         bool empty()
