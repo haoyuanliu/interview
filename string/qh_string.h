@@ -20,7 +20,7 @@ namespace qh
         ~string();
 
         //get
-        size_t size() const;
+        int size() const;
         const char* data() const;
         const char* c_str() const;
 

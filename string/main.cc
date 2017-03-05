@@ -33,6 +33,11 @@ void test1()
     qh::string str1(s);
     printf("%s\n", str1.data());
     printf("%s\n", str1.c_str());
+    qh::string str2(str1);
+    printf("%s\n", str2.data());
+    for(int i = 0; i < str2.size(); ++i)
+        printf("%c ", str2[i]);
+    printf("\n");
 }
 
 int main(int argc, char* argv[])

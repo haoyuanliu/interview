@@ -5,7 +5,7 @@
 
 namespace qh
 {
-    // TODO ½«ÔÚÕâÀïĞ´ÊµÏÖ´úÂë
+    // TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´Êµï¿½Ö´ï¿½ï¿½ï¿½
 
     string::string()
         : data_(NULL), len_(0)
@@ -61,7 +61,7 @@ namespace qh
         len_ = 0;
     }
 
-    size_t string::size() const
+    int string::size() const
     {
         return len_;
     }
@@ -78,7 +78,7 @@ namespace qh
 
     char& string::operator[]( size_t index )
     {
-        assert(index > 0 && index < len_);
+        assert(index >= 0 && index < len_);
         return data_[index];
     }
 }
