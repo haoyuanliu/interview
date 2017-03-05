@@ -42,4 +42,3 @@ namespace qh
 }
 
 #endif //PROXY_URL_EXTRACTOR_H_
-

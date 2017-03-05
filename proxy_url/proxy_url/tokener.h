@@ -95,6 +95,8 @@ namespace qh
         */
         std::string nextString();
 
+        std::string nextCleanString(char quote);
+
         /**
         * Skip characters until the next character is the requested character.
         * If the requested character is not found, no characters are skipped.
@@ -192,7 +194,7 @@ namespace qh
 
     inline void Tokener::reset( const char* ps, const s32 len )
     {
-        m_pDataEnd = len + ps; 
+        m_pDataEnd = len + ps;
         if ( len < 0 && ps )
         {
             m_pDataEnd = ps + strlen( ps );
@@ -339,6 +341,23 @@ namespace qh
         return std::string( startpos, m_pCurPos - startpos - 1 );
     }
 
+    inline std::string Tokener::nextCleanString(char quote)
+    {
+        const char *startpos = m_pCurPos;
+        while(*m_pCurPos++ != quote)
+        {
+            if(*m_pCurPos == '&')
+                startpos = m_pCurPos+1;
+            if(isEnd())
+            {
+                m_pCurPos = startpos;
+                return std::string();
+            }
+        }
+        assert(m_pCurPos > startpos);
+        return std::string(startpos, m_pCurPos - startpos - 1);
+    }
+
     inline char Tokener::skipTo( char to )
     {
         register char c = 0;
@@ -409,14 +428,14 @@ namespace qh
         *  So, we just skipTo( 0x)0A )
         */
 
-        char c = skipTo( (char)0x0a ); 
+        char c = skipTo( (char)0x0a );
         if ( c == 0 )
         {
             return false;
         }
 
         // skip the last char of this line, and then go to a new line
-        next(); 
+        next();
         return true;
     }
 
@@ -424,5 +443,3 @@ namespace qh
 };//end of namespace qh
 
 #endif // #ifdef _OSLIB_TOKENER_H_
-
-

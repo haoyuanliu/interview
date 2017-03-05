@@ -45,7 +45,7 @@ void test_ProxUrlExtractor_Extract1()
             all_test_ok = false;
             assert(false);
         }
-        else 
+        else
         {
             //fprintf(stderr, "test OK [%s]\n", test_data[i][0].data());
         }
@@ -55,7 +55,7 @@ void test_ProxUrlExtractor_Extract1()
     {
         printf("%s All test OK!\n", __FUNCTION__);
     }
-    else 
+    else
     {
         printf("%s test failed!\n", __FUNCTION__);
     }
@@ -98,7 +98,7 @@ void test_ProxUrlExtractor_Extract2()
         {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs&u=http://hnujug.com/", "http://hnujug.com/"},
         {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs&u=http://hnujug.com/&xxx=kvpair_token", "http://hnujug.com/"},
         {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs", ""},
-        {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs&uu=http://hnujug.com/&xxx=kvpair_token", ""},        
+        {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs&uu=http://hnujug.com/&xxx=kvpair_token", ""},
         {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs&u", ""},
         {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs&uu=http://hnujug.com/&xxx=kvpair_token", ""},
         {"http://www.microsofttranslator.com/bv.aspx?from=&to=zh-chs&a=http://hnujug.com/", "http://hnujug.com/"},
@@ -128,12 +128,13 @@ void test_ProxUrlExtractor_Extract2()
     bool all_test_ok = true;
     for (size_t i = 0; i < H_ARRAY_SIZE(test_data); i++)
     {
-        if (ProxyURLExtractor::Extract(keys, test_data[i][0]) != test_data[i][1]) {
+        if (ProxyURLExtractor::Extract(keys, test_data[i][0]) != test_data[i][1])
+        {
             fprintf(stderr, "test failed [%s]\n", test_data[i][0].data());
             all_test_ok = false;
             assert(false);
         }
-        else 
+        else
         {
             //fprintf(stderr, "test OK [%s]\n", test_data[i][0].data());
         }
@@ -142,8 +143,8 @@ void test_ProxUrlExtractor_Extract2()
     if (all_test_ok)
     {
         printf("%s All test OK!\n", __FUNCTION__);
-    } 
-    else 
+    }
+    else
     {
         printf("%s test failed!\n", __FUNCTION__);
     }
@@ -158,5 +159,3 @@ int main(int argc, char* argv[])
 #endif
 	return 0;
 }
-
-
