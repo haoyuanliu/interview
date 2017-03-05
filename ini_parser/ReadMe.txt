@@ -2,8 +2,8 @@
 
 这个INI解析器可以直接解析内存数据和磁盘文件。
 举个简单例子：
-	
-const char* ini_text= "a=1\nb=2\n"; 
+
+const char* ini_text= "a=1\nb=2\n";
 qh::INIParser parser;
 if (!parser.Parse(ini_text, strlen(ini_text), "\n", "=")) {
     //TODO error process

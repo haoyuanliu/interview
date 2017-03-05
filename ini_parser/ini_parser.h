@@ -2,43 +2,55 @@
 #define QIHOO_INI_PARSER_H_
 
 #include <string>
+#include <map>
+#include <set>
+#include <tr1/unordered_map>
 
 namespace qh
 {
+    //typedef std::tr1::unordered_map<std::string, std::string> keyToValue;
     class INIParser
     {
     public:
-        INIParser();
-        ~INIParser();
+        INIParser()
+        {
+            std::tr1::unordered_map<std::string, std::string> keyToValue_;
+        }
+        ~INIParser()
+        {
+            keyToValue_.clear();
+        }
 
-        //! \brief ½âÎöÒ»¸ö´ÅÅÌÉÏµÄINIÎÄ¼þ
+        //! \brief ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ïµï¿½INIï¿½Ä¼ï¿½
         //! \param[in] - const std::string & ini_file_path
         //! \return - bool
         bool Parse(const std::string& ini_file_path);
 
-        //! \brief ½âÎöÒ»¶ÎÐÎÈçINI¸ñÊ½µÄÄÚ´æÊý¾Ý¡£
-        //!   ÀýÈç£ºini_data="a:1||b:2||c:3"
-        //!         µ÷ÓÃ<code>Parse(ini_data, ini_data_len, "||", ":")</code>¼´¿É½âÎö³öÕâ¶ÎÊý¾Ý¡£
-        //!         ½âÎöÍê±ÏÖ®ºó 
+        //! \brief ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½INIï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+        //!   ï¿½ï¿½ï¿½ç£ºini_data="a:1||b:2||c:3"
+        //!         ï¿½ï¿½ï¿½ï¿½<code>Parse(ini_data, ini_data_len, "||", ":")</code>ï¿½ï¿½ï¿½É½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¡ï¿½
+        //!         ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö®ï¿½ï¿½
         //!         Get("a")=="1" && Get("b")=="2" && Get("c")=="3"
         //! \param[in] - const char * ini_data
         //! \param[in] - size_t ini_data
         //! \param[in] - const std::string & line_seperator
         //! \param[in] - const std::string & key_value_seperator
         //! \return - bool
-        bool Parse(const char* ini_data, size_t ini_data_len, const std::string& line_seperator = "\n", const std::string& key_value_seperator = "=");
+        bool Parse(const char* ini_data, size_t ini_data_len,
+            const std::string& line_seperator = "\n", const std::string& key_value_seperator = "=");
 
-        //! \brief ´ÓÄ¬ÈÏsectionÖÐ²éÕÒÄ³¸ökey£¬²¢·µ»ØÕÒµ½µÄvalue¡£Èç¹ûÕÒ²»µ½£¬·µ»ØÒ»¸ö¿Õ´®
+        //! \brief ï¿½ï¿½Ä¬ï¿½ï¿½sectionï¿½Ð²ï¿½ï¿½ï¿½Ä³ï¿½ï¿½keyï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½valueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Õ´ï¿½
         //! \param[in] - const std::string & key
-        //! \param[in] - bool * found - Êä³ö²ÎÊý£¬true±íÃ÷ÕÒµ½Õâ¸ökey
-        //! \return - const std::string& - ·µ»ØµÄ¾ßÌåkey¶ÔÓ¦µÄvalue
+        //! \param[in] - bool * found - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½trueï¿½ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½key
+        //! \return - const std::string& - ï¿½ï¿½ï¿½ØµÄ¾ï¿½ï¿½ï¿½keyï¿½ï¿½Ó¦ï¿½ï¿½value
         const std::string& Get(const std::string& key, bool* found);
 
         const std::string& Get(const std::string& section, const std::string& key, bool* found);
 
     private:
+        std::tr1::unordered_map<std::string, std::string> keyToValue_;
+        //keyToValue keyToValue_;
     };
 }
 
 #endif
-
