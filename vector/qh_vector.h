@@ -25,20 +25,6 @@ namespace qh
             }
         }
 
-        vector<T>& operator=(const vector<T>& rhs)
-        {
-            if(this != &rhs)
-            {
-                clear();
-                size_ = rhs.size();
-                capa_ = rhs.capa();
-                data_ = new T[capa_];
-                for(size_t i = 0; i < rhs.size(); ++i)
-                    data_[i] = rhs[i];
-            }
-            return *this;
-        }
-
         //dtor
         ~vector()
         {
@@ -119,6 +105,20 @@ namespace qh
         bool empty()
         {
             return size_ == 0;
+        }
+
+        vector<T>& operator=(const vector<T> &rhs)
+        {
+            if(this != &rhs)
+            {
+                clear();
+                size_ = rhs.size();
+                capa_ = rhs.capa();
+                data_ = new T[capa_];
+                for(size_t i = 0; i < rhs.size(); ++i)
+                    data_[i] = rhs[i];
+            }
+            return *this;
         }
 
     private:
