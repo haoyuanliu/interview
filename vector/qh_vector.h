@@ -16,28 +16,27 @@ namespace qh
 
         explicit vector( size_t n, const T& value = T())
         {
-            int capa = 1;
-            while(capa < n)
-                capa <<= 1;
-            data_ = new T[capa];
-            for (size_t i = 0; i < n; i++)
+            size_ = n;
+            capa_ = n;
+            data_ = new T[capa_];
+            for (int i = 0; i < n; i++)
             {
                 data_[i] = value;
             }
-            size_ = n;
-            capa_ = capa;
         }
 
         vector<T>& operator=(const vector<T>& rhs)
         {
-            int capa = 1;
-            while(capa < rhs.size())
-                capa <<= 1;
-            data_ = new T[capa];
-            for(int i = 0; i < rhs.size(); ++i)
-                data_[i] = rhs[i];
-            size_ = rhs.size_;
-            capa_ = capa;
+            if(this != &rhs)
+            {
+                delete[] data_;
+                size_ = rhs.size();
+                capa_ = rhs.capa();
+                data_ = new T[capa_];
+                for(int i = 0; i < rhs.size(); ++i)
+                    data_[i] = rhs[i];
+            }
+            return *this;
         }
 
         //dtor
@@ -58,6 +57,10 @@ namespace qh
             return size_;
         }
 
+        size_t capa() const
+        {
+            return capa_;
+        }
         // set & get
         T& operator[](size_t index)
         {
