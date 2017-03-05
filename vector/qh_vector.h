@@ -19,7 +19,7 @@ namespace qh
             size_ = n;
             capa_ = n;
             data_ = new T[capa_];
-            for (int i = 0; i < n; i++)
+            for (size_t i = 0; i < n; i++)
             {
                 data_[i] = value;
             }
@@ -29,11 +29,12 @@ namespace qh
         {
             if(this != &rhs)
             {
-                delete[] data_;
+                if(data_)
+                    delete[] data_;
                 size_ = rhs.size();
                 capa_ = rhs.capa();
                 data_ = new T[capa_];
-                for(int i = 0; i < rhs.size(); ++i)
+                for(size_t i = 0; i < rhs.size(); ++i)
                     data_[i] = rhs[i];
             }
             return *this;
@@ -45,10 +46,10 @@ namespace qh
             if (data_)
             {
                 delete[] data_;
-                data_ = NULL;
-                capa_ = 0;
-                size_ = 0;
             }
+            data_ = NULL;
+            capa_ = 0;
+            size_ = 0;
         }
 
         //get
@@ -79,8 +80,7 @@ namespace qh
         void pop_back(T* element)
         {
             assert(size_ > 0);
-            *element = data_[size_ - 1];
-            size_--;
+            *element = data_[--size_];
         }
 
         void resize(size_t newSize)
@@ -102,7 +102,7 @@ namespace qh
 
             T* temp = data_;
             data_ = new T[newCapa];
-            for(int i = 0; i < size_; ++i)
+            for(size_t i = 0; i < size_; ++i)
                 data_[i] = temp[i];
             delete[] temp;
             capa_ = newCapa;
@@ -110,7 +110,7 @@ namespace qh
 
         void clear()
         {
-            for(int i = 0; i < size_; ++i)
+            for(size_t i = 0; i < size_; ++i)
                 data_[i] = 0;
         }
 

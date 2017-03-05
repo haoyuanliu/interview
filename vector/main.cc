@@ -1,5 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
+#include <iostream>
 #include "qh_vector.h"
 
 void test()
@@ -34,12 +36,29 @@ void test1()
     printf("\n");
 }
 
+void test2()
+{
+    qh::vector<std::string> str(5, "Hello");
+    str.push_back("Hello");
+    str.push_back("Nihao");
+    for(int i = 0 ; i < str.size(); ++i)
+        std::cout << str[i] << std::endl;
+
+    std::string s;
+    while(str.size())
+    {
+        str.pop_back(&s);
+        std::cout << s << std::endl;
+    }
+}
+
 int main(int argc, char* argv[])
 {
     //TODO ���������ӵ�Ԫ���ԣ�Խ��Խ�ã�����·��������ԽȫԽ��
     //TODO ��Ԫ����д�����ο�INIParser�Ǹ���Ŀ����Ҫдһ��printf��Ҫ��assert���ж����жϡ�
     test();
-    test1();
+    //test1();
+    test2();
 
 #ifdef WIN32
     system("pause");
