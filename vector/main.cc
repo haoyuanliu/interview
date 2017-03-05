@@ -1,14 +1,31 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include "qh_vector.h"
 
+void test()
+{
+    int len = 100;
+    qh::vector<int> nums;
+    for(int i = 0; i < len; ++i)
+        nums.push_back(i);
+    for(int i = 0 ; i < nums.size(); ++i)
+        printf("%d ", nums[i]);
+    printf("\n");
+
+    int temp;
+    for(int i = 0; i < len; ++i)
+    {
+        nums.pop_back(&temp);
+        printf("%d ", temp);
+    }
+    printf("\n");
+}
 
 int main(int argc, char* argv[])
 {
-    //TODO ÔÚÕâÀïÌí¼Óµ¥Ôª²âÊÔ£¬Ô½¶àÔ½ºÃ£¬´úÂëÂ·¾¶¸²¸ÇÂÊÔ½È«Ô½ºÃ
-    //TODO µ¥Ôª²âÊÔÐ´·¨Çë²Î¿¼INIParserÄÇ¸öÏîÄ¿£¬²»ÒªÐ´Ò»¶Ñprintf£¬ÒªÓÃassert½øÐÐ¶ÏÑÔÅÐ¶Ï¡£
-
-    qh::vector<int> num_vect;
-    num_vect.push_back(1);
+    //TODO ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½Ôªï¿½ï¿½ï¿½Ô£ï¿½Ô½ï¿½ï¿½Ô½ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô½È«Ô½ï¿½ï¿½
+    //TODO ï¿½ï¿½Ôªï¿½ï¿½ï¿½ï¿½Ð´ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½INIParserï¿½Ç¸ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ÒªÐ´Ò»ï¿½ï¿½printfï¿½ï¿½Òªï¿½ï¿½assertï¿½ï¿½ï¿½Ð¶ï¿½ï¿½ï¿½ï¿½Ð¶Ï¡ï¿½
+    test();
 
 #ifdef WIN32
     system("pause");
@@ -16,4 +33,3 @@ int main(int argc, char* argv[])
 
 	return 0;
 }
-
