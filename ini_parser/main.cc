@@ -85,6 +85,8 @@ void test4()
     const std::string& c = parser.Get("c", NULL);
     assert(c == "1");
 
+    const std::string& d = parser.Get("d", NULL);
+    assert(d == "5");
 }
 
 int main(int argc, char* argv[])
