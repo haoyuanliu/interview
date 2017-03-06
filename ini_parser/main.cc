@@ -2,6 +2,17 @@
 
 #include <string.h>
 #include <assert.h>
+#include <stdio.h>
+
+void test()
+{
+    const char* ini_text = "a=1\nb=2\n";
+    qh::INIParser parser;
+    if(!parser.Parse(ini_text, strlen(ini_text), "\n", "="))
+    {
+        printf("Success!\n");
+    }
+}
 /*
 void test1()
 {
@@ -60,7 +71,7 @@ void test3()
 int main(int argc, char* argv[])
 {
     //TODO ���������ӵ�Ԫ���ԣ�Խ��Խ�ã�����·��������ԽȫԽ��
-
+    test();
     //test1();
     //test2();
     //test3();
