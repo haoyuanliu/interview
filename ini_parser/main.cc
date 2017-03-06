@@ -13,7 +13,7 @@ void test()
         printf("Success!\n");
     }
 }
-/*
+
 void test1()
 {
     const char* ini_text= "a=1\nb=2\n";
@@ -25,7 +25,7 @@ void test1()
     const std::string& a = parser.Get("a", NULL);
     assert(a == "1");
 
-    std::string b = parser.Get("a", NULL);
+    std::string b = parser.Get("b", NULL);
     assert(b == "2");
 
     const std::string& c = parser.Get("c", NULL);
@@ -43,12 +43,13 @@ void test2()
     const std::string& a = parser.Get("a", NULL);
     assert(a == "1");
 
-    std::string b = parser.Get("a", NULL);
+    std::string b = parser.Get("b", NULL);
     assert(b == "2");
 
     const std::string& c = parser.Get("c", NULL);
     assert(c == "3");
 }
+
 
 void test3()
 {
@@ -61,20 +62,21 @@ void test3()
     const std::string& a = parser.Get("a", NULL);
     assert(a == "1");
 
-    std::string b = parser.Get("a", NULL);
+    std::string b = parser.Get("b", NULL);
     assert(b == "2");
 
     const std::string& c = parser.Get("c", NULL);
     assert(c == "3");
 }
-*/
+
+
 int main(int argc, char* argv[])
 {
     //TODO ���������ӵ�Ԫ���ԣ�Խ��Խ�ã�����·��������ԽȫԽ��
     test();
-    //test1();
-    //test2();
-    //test3();
-
+    test1();
+    test2();
+    test3();
+    std::cout << "Finished!" << std::endl;
     return 0;
 }

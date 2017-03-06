@@ -41,14 +41,25 @@ namespace qh
             std::set<std::string> keyAndValues;
             std::string iniStr(ini_data, ini_data_len);
             iniStr += line_seperator;
-            std::cout << iniStr.size() << std::endl;
 
             size_t found;
             while((found = iniStr.find(line_seperator)) != std::string::npos)
             {
-                std::cout << iniStr.substr(0, found) << std::endl;
+                //std::cout << iniStr.substr(0, found) << std::endl;
                 keyAndValues.insert(iniStr.substr(0, found));
                 iniStr = iniStr.substr(found + std::string(line_seperator).size());
+            }
+            std::set<std::string>::iterator it;
+            for(it = keyAndValues.begin(); it != keyAndValues.end(); ++it)
+            {
+                std::string temp = *it;
+                if((found = temp.find(key_value_seperator)) == std::string::npos)
+                    continue;
+                //std::cout << key_value_seperator.size() << std::endl;
+                //std::cout << found << " " << key_value_seperator.size() << std::endl;
+                keyToValue_[temp.substr(0, found)] = temp.substr(found + key_value_seperator.size());
+                ret = true;
+                //std::cout << temp.substr(0, found) << " " << temp.substr(found + key_value_seperator.size()) << std::endl;
             }
 
 
@@ -59,7 +70,15 @@ namespace qh
         //! \param[in] - const std::string & key
         //! \param[in] - bool * found - ����������true�����ҵ�����key
         //! \return - const std::string& - ���صľ���key��Ӧ��value
-        //const std::string& Get(const std::string& key, bool* found);
+        const std::string& Get(const std::string& key, bool* found)
+        {
+            if(keyToValue_.find(key) == keyToValue_.end())
+                if(found)
+                    *found = false;
+            if(found)
+                *found = true;
+            return keyToValue_[key];
+        }
 
         //const std::string& Get(const std::string& section, const std::string& key, bool* found);
 
