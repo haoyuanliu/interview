@@ -38,8 +38,19 @@ namespace qh
             const std::string& line_seperator = "\n", const std::string& key_value_seperator = "=")
         {
             bool ret = false;
+            std::set<std::string> keyAndValues;
             std::string iniStr(ini_data, ini_data_len);
-            
+            iniStr += line_seperator;
+            std::cout << iniStr.size() << std::endl;
+
+            size_t found;
+            while((found = iniStr.find(line_seperator)) != std::string::npos)
+            {
+                std::cout << iniStr.substr(0, found) << std::endl;
+                keyAndValues.insert(iniStr.substr(0, found));
+                iniStr = iniStr.substr(found + std::string(line_seperator).size());
+            }
+
 
             return ret;
         }
