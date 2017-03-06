@@ -26,13 +26,10 @@ namespace qh
         //! \return - bool
         bool Parse(const std::string& ini_file_path)
         {
-            FILE *fp = NULL;
+            /*FILE *fp = NULL;
             fp = fopen(ini_file_path.data(), "r");
             if(fp == NULL)
-            {
-                //std::cout << "False" << std::endl;
                 return false;
-            }
 
             fseek(fp, 0L, SEEK_END);
             size_t flen = ftell(fp);
@@ -40,10 +37,25 @@ namespace qh
             char *str = new char[flen];
             fseek(fp, 0L, SEEK_SET);
             fread(str, flen-1, 1, fp);
-            str[flen] = 0;
-            printf("1:%s %d\n", str, (int)(flen-1));
+            str[flen] = 0;*/
+            std::string str;
+            std::ifstream readFile(ini_file_path.data());
+            if(!readFile)
+                return false;
+            while(readFile >> str)
+            {
+                //std::cout << str << std::endl;
+                size_t found;
+                while((found = str.find("\\n")) != std::string::npos)
+                {
+                    str = str.substr(0, found) + '\n' + str.substr(found + 2);
+                }
+                //std::cout << str << " " << str.size() << std::endl;
+                if(!Parse(str.data(), str.size()))
+                    return false;
+            }
 
-            return Parse(str, flen-1);
+            return true;
         }
 
         //! \brief 解析一段形如INI格式的内存数据。
@@ -59,7 +71,7 @@ namespace qh
         bool Parse(const char* ini_data, size_t ini_data_len,
             const std::string& line_seperator = "\n", const std::string& key_value_seperator = "=")
         {
-            printf("2:%s %d\n", ini_data, (int)ini_data_len);
+            //printf("%s %d\n", ini_data, (int)ini_data_len);
             bool ret = false;
             std::set<std::string> keyAndValues;
             std::string iniStr(ini_data, ini_data_len);

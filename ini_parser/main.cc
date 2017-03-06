@@ -74,7 +74,7 @@ void test4()
     qh::INIParser parser;
     const std::string ini_file_path= "./test.ini";
     if(!parser.Parse(ini_file_path))
-        std::cout << "Success!" << std::endl;
+        std::cout << "False!" << std::endl;
 
     const std::string& a = parser.Get("a", NULL);
     assert(a == "1");
@@ -83,7 +83,7 @@ void test4()
     assert(b == "2");
 
     const std::string& c = parser.Get("c", NULL);
-    assert(c == "3");
+    assert(c == "1");
 
 }
 
