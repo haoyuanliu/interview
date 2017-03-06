@@ -69,6 +69,23 @@ void test3()
     assert(c == "3");
 }
 
+void test4()
+{
+    qh::INIParser parser;
+    const std::string ini_file_path= "./test.ini";
+    if(!parser.Parse(ini_file_path))
+        std::cout << "Success!" << std::endl;
+
+    const std::string& a = parser.Get("a", NULL);
+    assert(a == "1");
+
+    std::string b = parser.Get("b", NULL);
+    assert(b == "2");
+
+    const std::string& c = parser.Get("c", NULL);
+    assert(c == "3");
+
+}
 
 int main(int argc, char* argv[])
 {
@@ -77,6 +94,7 @@ int main(int argc, char* argv[])
     test1();
     test2();
     test3();
+    test4();
     std::cout << "Finished!" << std::endl;
     return 0;
 }

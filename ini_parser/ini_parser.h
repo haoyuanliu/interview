@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <sstream>
+#include <fstream>
 #include <string>
 #include <set>
 #include <tr1/unordered_map>
@@ -19,18 +21,35 @@ namespace qh
         {
         }
 
-        //! \brief ����һ�������ϵ�INI�ļ�
+        //! \brief 解析一个磁盘上的INI文件
         //! \param[in] - const std::string & ini_file_path
         //! \return - bool
-        /*bool Parse(const std::string& ini_file_path)
+        bool Parse(const std::string& ini_file_path)
         {
-            return Parse(&ini_file_path, sizeof ini_file_path, "\n", "=");
-        }*/
+            FILE *fp = NULL;
+            fp = fopen(ini_file_path.data(), "r");
+            if(fp == NULL)
+            {
+                //std::cout << "False" << std::endl;
+                return false;
+            }
 
-        //! \brief ����һ������INI��ʽ���ڴ����ݡ�
-        //!   ���磺ini_data="a:1||b:2||c:3"
-        //!         ����<code>Parse(ini_data, ini_data_len, "||", ":")</code>���ɽ������������ݡ�
-        //!         ��������֮��
+            fseek(fp, 0L, SEEK_END);
+            size_t flen = ftell(fp);
+
+            char *str = new char[flen];
+            fseek(fp, 0L, SEEK_SET);
+            fread(str, flen-1, 1, fp);
+            str[flen] = 0;
+            printf("1:%s %d\n", str, (int)(flen-1));
+
+            return Parse(str, flen-1);
+        }
+
+        //! \brief 解析一段形如INI格式的内存数据。
+        //!   例如：ini_data="a:1||b:2||c:3"
+        //!         调用<code>Parse(ini_data, ini_data_len, "||", ":")</code>即可解析出这段数据。
+        //!         解析完毕之后
         //!         Get("a")=="1" && Get("b")=="2" && Get("c")=="3"
         //! \param[in] - const char * ini_data
         //! \param[in] - size_t ini_data
@@ -40,6 +59,7 @@ namespace qh
         bool Parse(const char* ini_data, size_t ini_data_len,
             const std::string& line_seperator = "\n", const std::string& key_value_seperator = "=")
         {
+            printf("2:%s %d\n", ini_data, (int)ini_data_len);
             bool ret = false;
             std::set<std::string> keyAndValues;
             std::string iniStr(ini_data, ini_data_len);
@@ -69,10 +89,10 @@ namespace qh
             return ret;
         }
 
-        //! \brief ��Ĭ��section�в���ĳ��key���������ҵ���value�������Ҳ���������һ���մ�
+        //! \brief 从默认section中查找某个key，并返回找到的value。如果找不到，返回一个空串
         //! \param[in] - const std::string & key
-        //! \param[in] - bool * found - ����������true�����ҵ�����key
-        //! \return - const std::string& - ���صľ���key��Ӧ��value
+        //! \param[in] - bool * found - 输出参数，true表明找到这个key
+        //! \return - const std::string& - 返回的具体key对应的value
         const std::string& Get(const std::string& key, bool* found)
         {
             if(keyToValue_.find(key) == keyToValue_.end())
