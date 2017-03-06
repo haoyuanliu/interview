@@ -89,6 +89,24 @@ void test4()
     assert(d == "5");
 }
 
+void test5()
+{
+    qh::INIParser parser;
+    const std::string ini_file_path= "./test.ini";
+
+    const std::string& a = parser.Get(ini_file_path, "a", NULL);
+    assert(a == "1");
+
+    std::string b = parser.Get("b", NULL);
+    assert(b == "2");
+
+    const std::string& c = parser.Get("c", NULL);
+    assert(c == "1");
+
+    const std::string& d = parser.Get("d", NULL);
+    assert(d == "5");
+}
+
 int main(int argc, char* argv[])
 {
     //TODO ���������ӵ�Ԫ���ԣ�Խ��Խ�ã�����·��������ԽȫԽ��
@@ -97,6 +115,7 @@ int main(int argc, char* argv[])
     test2();
     test3();
     test4();
+    test5();
     std::cout << "Finished!" << std::endl;
     return 0;
 }

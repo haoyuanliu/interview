@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <iostream>
-#include <sstream>
 #include <fstream>
 #include <string>
 #include <set>
@@ -115,7 +114,12 @@ namespace qh
             return keyToValue_[key];
         }
 
-        //const std::string& Get(const std::string& section, const std::string& key, bool* found);
+        const std::string& Get(const std::string& section, const std::string& key, bool* found)
+        {
+            if(!Parse(section))
+                return keyToValue_[""];
+            return Get(key, found);
+        }
 
     private:
         std::tr1::unordered_map<std::string, std::string> keyToValue_;
