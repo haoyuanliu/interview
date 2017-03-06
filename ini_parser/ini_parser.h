@@ -2,23 +2,21 @@
 #define QIHOO_INI_PARSER_H_
 
 #include <string>
-#include <map>
 #include <set>
 #include <tr1/unordered_map>
 
 namespace qh
 {
-    //typedef std::tr1::unordered_map<std::string, std::string> keyToValue;
     class INIParser
     {
     public:
         INIParser()
         {
-            std::tr1::unordered_map<std::string, std::string> keyToValue_;
+            keyToValue_ = new std::tr1::unordered_map<std::string, std::string>;
         }
         ~INIParser()
         {
-            keyToValue_.clear();
+            keyToValue_->clear();
         }
 
         //! \brief ����һ�������ϵ�INI�ļ�
@@ -36,8 +34,7 @@ namespace qh
         //! \param[in] - const std::string & line_seperator
         //! \param[in] - const std::string & key_value_seperator
         //! \return - bool
-        bool Parse(const char* ini_data, size_t ini_data_len,
-            const std::string& line_seperator = "\n", const std::string& key_value_seperator = "=");
+        bool Parse(const char* ini_data, size_t ini_data_len, const std::string& line_seperator = "\n", const std::string& key_value_seperator = "=");
 
         //! \brief ��Ĭ��section�в���ĳ��key���������ҵ���value�������Ҳ���������һ���մ�
         //! \param[in] - const std::string & key
@@ -48,8 +45,7 @@ namespace qh
         const std::string& Get(const std::string& section, const std::string& key, bool* found);
 
     private:
-        std::tr1::unordered_map<std::string, std::string> keyToValue_;
-        //keyToValue keyToValue_;
+        std::tr1::unordered_map<std::string, std::string> *keyToValue_;
     };
 }
 
