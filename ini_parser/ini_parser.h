@@ -22,7 +22,10 @@ namespace qh
         //! \brief ����һ�������ϵ�INI�ļ�
         //! \param[in] - const std::string & ini_file_path
         //! \return - bool
-        //bool Parse(const std::string& ini_file_path);
+        /*bool Parse(const std::string& ini_file_path)
+        {
+            return Parse(&ini_file_path, sizeof ini_file_path, "\n", "=");
+        }*/
 
         //! \brief ����һ������INI��ʽ���ڴ����ݡ�
         //!   ���磺ini_data="a:1||b:2||c:3"
