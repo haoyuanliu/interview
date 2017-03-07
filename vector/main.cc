@@ -82,6 +82,6 @@ int main(int argc, char* argv[])
 #ifdef WIN32
     system("pause");
 #endif
-
+    printf("Success!\n");
 	return 0;
 }
