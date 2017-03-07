@@ -9,6 +9,7 @@
 
 int resolve(const char* input)
 {
+    int res = 0;
     std::istringstream strs(input);
     std::string str;
     int len;
@@ -24,9 +25,25 @@ int resolve(const char* input)
         left = atoi(str.substr(0, str.find(',')).data());
         right = atoi(str.substr(str.find(',')+1, str.rfind(',')).data());
         height = atoi(str.substr(str.rfind(',')+1).data());
-
+        
+        if(left > end)
+        {
+            res += maxHeight * 2;
+            start = left;
+            end = right;
+            maxHeight = height;
+        }
+        else
+        {
+            start = std::min(start, left);
+            end = std::max(end, right);
+            maxHeight = std::max(maxHeight, height);
+        }
     }
-    return 0;
+    res += maxHeight * 2;
+    res += end;
+    std::cout << res << std::endl;
+    return res;
 }
 
 int main(int argc, char* argv[])
