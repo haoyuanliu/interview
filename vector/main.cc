@@ -69,6 +69,17 @@ void test4()
     printf("\n");
 }
 
+void test5()
+{
+    int len = 100;
+    qh::vector<int> nums(len, 5);
+    qh::vector<int> nums1 = nums;
+    qh::vector<int>::iterator it;
+    for(it = nums1.begin(); it != nums1.end(); ++it)
+        printf("%d ", *it);
+    printf("\n");
+}
+
 int main(int argc, char* argv[])
 {
     //TODO ���������ӵ�Ԫ���ԣ�Խ��Խ�ã�����·��������ԽȫԽ��
@@ -78,6 +89,7 @@ int main(int argc, char* argv[])
     test2();
     test3();
     test4();
+    test5();
 
 #ifdef WIN32
     system("pause");

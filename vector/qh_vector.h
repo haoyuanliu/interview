@@ -64,6 +64,20 @@ namespace qh
             return data_[index];
         }
 
+        vector<T>& operator=(const vector<T> &rhs)
+        {
+            if(this != &rhs)
+            {
+                clear();
+                size_ = rhs.size();
+                capa_ = rhs.capa();
+                data_ = new T[capa_];
+                for(size_t i = 0; i < rhs.size(); ++i)
+                    data_[i] = rhs[i];
+            }
+            return *this;
+        }
+
         // set
         void push_back(const T& element)
         {
@@ -72,10 +86,16 @@ namespace qh
 
             data_[size_++] = element;
         }
+
         void pop_back(T* element)
         {
             assert(size_ > 0);
             *element = data_[--size_];
+        }
+
+        const T& back() const
+        {
+            return data_[size_ - 1];
         }
 
         void resize(size_t newSize)
@@ -85,6 +105,8 @@ namespace qh
                 size_ = newSize;
                 return;
             }
+            while(capa_ * 2 + 1 < newSize)
+                capa_ = capa_ * 2 + 1;
             reserve(capa_ * 2 + 1);
             capa_ = capa_ * 2 + 1;
             size_ = newSize;
@@ -117,18 +139,16 @@ namespace qh
             return size_ == 0;
         }
 
-        vector<T>& operator=(const vector<T> &rhs)
+        typedef T* iterator;
+
+        iterator begin()
         {
-            if(this != &rhs)
-            {
-                clear();
-                size_ = rhs.size();
-                capa_ = rhs.capa();
-                data_ = new T[capa_];
-                for(size_t i = 0; i < rhs.size(); ++i)
-                    data_[i] = rhs[i];
-            }
-            return *this;
+            return &data_[0];
+        }
+
+        iterator end()
+        {
+            return &data_[size_];
         }
 
     private:
