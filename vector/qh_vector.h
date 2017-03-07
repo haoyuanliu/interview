@@ -1,7 +1,8 @@
 #ifndef QIHOO_VECTOR_H_
 #define QIHOO_VECTOR_H_
-
 #include <assert.h>
+#include <stdio.h>
+#include <stdlib.h>
 
 namespace qh
 {
