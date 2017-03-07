@@ -14,6 +14,15 @@ namespace qh
         {
         }
 
+        vector(const vector &rhs)
+        {
+            size_ = rhs.size();
+            capa_ = rhs.capa();
+            data_ = new T[capa_];
+            for(size_t i = 0; i < rhs.size(); ++i)
+                data_[i] = rhs[i];
+        }
+
         explicit vector( size_t n, const T& value = T())
         {
             size_ = n;
@@ -48,7 +57,7 @@ namespace qh
             return capa_;
         }
         // set & get
-        T& operator[](size_t index)
+        T& operator[](size_t index) const
         {
             assert(index >= 0 && index < size_);
             return data_[index];
