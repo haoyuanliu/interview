@@ -49,7 +49,7 @@ namespace qh
                 data_ = new char[rhs.len_ + 1];
             }
             len_ = rhs.len_;
-            strcpy(data_, rhs.data_);
+            strcpy(data_, rhs.data());
         }
         return *this;
     }
