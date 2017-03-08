@@ -26,7 +26,7 @@ int resolve(const char* input)
         left = atoi(str.substr(0, str.find(',')).data());
         right = atoi(str.substr(str.find(',')+1, str.rfind(',')).data());
         height = atoi(str.substr(str.rfind(',')+1).data());
-        
+
         heights.push_back(std::make_pair(left, -height));
         heights.push_back(std::make_pair(right, height));
     }
